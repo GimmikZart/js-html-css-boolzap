@@ -282,3 +282,7 @@ img {
   font-size: 25px;
   color: #6B7376;
 }
+
+#footer .fa-telegram-plane {
+  display: none;
+}

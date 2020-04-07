@@ -2,6 +2,17 @@
 
 
 $( document ).ready(function() {
+
+  $("#inputRisposta").focus(function(){
+    $(".fa-microphone").css("display","none");
+    $("#footer .fa-telegram-plane").css("display","block");
+  })
+
+  $("#inputRisposta").blur(function(){
+    $(".fa-microphone").css("display","block");
+    $("#footer .fa-telegram-plane").css("display","none");
+  })
+
   // creo l'evento alla pressione del tasto invio
   $("#inputRisposta").keypress(function(e) {
 
