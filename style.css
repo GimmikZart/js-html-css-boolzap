@@ -141,7 +141,6 @@ img {
 #spazioCerca {
   width: 85%;
   background-color: white;
-  border-left: 1px solid black;
   border-left: none;
   border-radius: 0px 3px 3px 0;
 }
@@ -215,6 +214,7 @@ img {
   height: calc(100% - 70px - 70px);
   background-image: url("img/sfondo.jpg");
   padding: 5% 10%;
+  overflow-y: auto;
 }
 
 .messaggio {
