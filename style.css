@@ -7,6 +7,8 @@
   font-family: sans-serif;
 }
 
+@import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
+
 body {
   display: flex;
   justify-content: center;
@@ -16,42 +18,178 @@ body {
   background-image: linear-gradient(to bottom, #009688 0px, #009688 15vh, #dddbd1 15vh, #d2dbdc 100% );
 }
 
+img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+}
+
 
 #app {
   display: flex;
   height: 95vh;
   width: 80%;
+  min-width: 900px;
+  min-height: 400px;
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+.clearfix::after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 /* NAVIGATORE PARTE SINISTRA */
 #navLeft {
   height: 100%;
   width: 35%;
-  border: 1px solid black;
+  border: 1px solid #d6d6d6;
 }
 
+/* header ----------*/
+
 .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 10px;
+  padding-right: 15px;
   height: 70px;
   width: 100%;
   background-color: #eaeaea;
 }
 
+.iconeNav .fas {
+  margin: 0 10px;
+  font-size: 22px;
+  color: #b1b1b1;
+}
+
+/* zona notifiche ---------*/
+
 #zonaNotifiche {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   height: 80px;
   width: 100%;
   background-color: #8edafc;
 }
 
+#alarm {
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  text-align: center;
+  line-height: 50px;
+  margin-left: 20px;
+  margin-right: 10px;
+}
+
+#alarm .fas {
+  font-size: 20px;
+  color: #8edafc;
+}
+
+#zonaNotifiche h3 {
+  font-weight: normal;
+  font-size: 16px;
+  font-weight: 400;
+  font-family: "Lato", sans-serif;
+}
+
+#zonaNotifiche a {
+  font-weight: normal;
+  font-size: 13.5px;
+  color: #6996be;
+}
+
+
+
+
+/* zona cerca-------------- */
 #zonaCerca {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: 50px;
   width: 100%;
   background-color: #fafafa;
 }
 
+#zonaCerca div {
+  height: 35px;
+  border: 1px solid #F5F5F5;
+}
+
+#icona {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #bdb9bb;
+  width: 13%;
+  background-color: white;
+  border-right: none;
+  border-radius: 3px 0 0 3px;
+}
+
+#spazioCerca {
+  width: 85%;
+  background-color: white;
+  border-left: 1px solid black;
+  border-left: none;
+  border-radius: 0px 3px 3px 0;
+}
+
+#spazioCerca input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  padding-left: 10px;
+}
+
+/* lista chat ----------------*/
+
 #listaChat {
   height: calc(100% - 70px - 80px - 50px);
   width: 100%;
   background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow-y: scroll;
+}
+
+.contatto {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  border-bottom: 1px solid #F5F5F5;
+}
+
+.contatto img {
+  margin: 0 20px;
+  width: 60px;
+  height: auto;
+}
+
+.contatto h3, .leftHeaderInfo h3 {
+  font-weight: normal;
+  font-size: 17px;
+}
+
+.contatto h4,
+.leftHeaderInfo h4 {
+  font-size: 13px;
+  color: #B6B9BB;
+  font-weight: normal;
 }
 
 /* NAVIGATORE PARTE DESTRA */
@@ -59,17 +197,88 @@ body {
 #chatRight {
   height: 100%;
   width: 65%;
-  border: 1px solid black;
 }
 
+/* HEADER---------------- */
+.leftHeader {
+  display: flex;
+  align-items: center;
+}
+
+.leftHeader img {
+  margin-right: 15px;
+}
+
+/* CHAT ------------------ */
 #chat {
   width: 100%;
   height: calc(100% - 70px - 70px);
   background-image: url("img/sfondo.jpg");
+  padding: 5% 10%;
 }
 
+.messaggio {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px 15px 20px 15px;
+  margin: 5px 0;
+  border-radius: 10px;
+  min-width: 20%;
+  max-width: 60%;
+  position: relative;
+}
+
+.inviato {
+  float: right;
+  clear: both;
+  background-color: #D5F9BA;
+}
+
+.ricevuto {
+  float: left;
+  clear: both;
+  background-color: white;;
+}
+
+.freccetta-info {
+  display: none;
+  color:#B6B9BB;
+}
+
+.messaggio:hover .freccetta-info {
+  display: block;
+}
+
+.orario-messaggio {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 10px;
+  color: #B6B9BB;
+}
+
+
+/* FOOTER CHAT---------------- */
+
 #footer {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   height: 70px;
   width: 100%;
-  background-color: #eaeaea;
+  background-color: #f3eeea;
+}
+
+#footer input {
+  width: 80%;
+  height: 70%;
+  border: none;
+  border-radius: 5px;
+  padding-left: 20px;
+  font-weight: normal;
+}
+
+#footer i {
+  font-size: 25px;
+  color: #6B7376;
 }
