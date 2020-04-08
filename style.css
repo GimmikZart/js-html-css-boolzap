@@ -286,3 +286,10 @@ img {
 #footer .fa-telegram-plane {
   display: none;
 }
+
+
+/* JAVASCRIPT CSS ------------ */
+
+.remove {
+  display: none;
+}

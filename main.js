@@ -19,24 +19,23 @@ $( document ).ready(function() {
     } //fine ciclo if di controllo tasto premuto
   }); // fine evento keypress
 
-// keydown
-  $("#inputCerca").keyup(function(e){
+  // creo l'evento al sollevamento dalla pressione dei tasti per scrivere
+  $("#inputCerca").keyup(function(){
     // salvo input utente in campo del filtro stringa1
     var stringaRicerca = $("#inputCerca").val().toUpperCase();
-    console.log(stringaRicerca);
 
-     // selezionare tutti i blocchi di contatto e ciclare tra di essi
+    // seleziono tutti i blocchi di contatto e ciclo tra di loro
     $(".contatto").each(function() {
       //salvo in una var il valore del testo del nome nel contatto (stringa2)
       var stringaNome = $(this).find(".nomeContatto").text().toUpperCase();
-
+      // imposto la condizione per far apparire e scomparire i contatti
       if (!(stringaNome.includes(stringaRicerca))) {
-        $(this).css("display", "none");
-      } // fine condizione
+        $(this).addClass("remove");
+      } else {
+        $(this).removeClass("remove");
+      }// fine condizione
     });// fine ciclo each
-
   }); // fine evento keyup
-
 }); // fine document.ready
 
 
