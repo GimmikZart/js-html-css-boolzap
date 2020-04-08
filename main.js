@@ -3,27 +3,18 @@
 
 $( document ).ready(function() {
 
-  $("#inputRisposta").focus(function(){
-    $(".fa-microphone").css("display","none");
-    $("#footer .fa-telegram-plane").css("display","block");
-  })
-
-  $("#inputRisposta").blur(function(){
-    $(".fa-microphone").css("display","block");
-    $("#footer .fa-telegram-plane").css("display","none");
-  })
+  // richiamo la funzione globale per far comparire l'icona microfono e sparire quella di invio
+  microfonoOn();
+  // richiamo la funzione globale per far comparire l'icona invio e sparire quella di microfono
+  tastoInviaOn();
 
   // creo l'evento alla pressione del tasto invio
   $("#inputRisposta").keypress(function(e) {
-
     // l'evento si innesca se viene premuto il tasto 13 della tastiera --> invio
     if (e.which == 13) {
-
+      // richiamo la funzione globale per inviare le risposte
       rispostaInviata();
-
-      $("#inputRisposta").val("");
-
-      // impostando il timeout a 1 secondo, rischiamo la funzione che mi stamnpa la risposta
+      // impostando il timeout, rischiamo la funzione globale che mi stamnpa la risposta del pc dopo 1 secondo
       setTimeout(rispostaRicevuta, 1000);
     } //fine ciclo if di controllo tasto premuto
   }); // fine evento keypress
@@ -35,6 +26,26 @@ $( document ).ready(function() {
 
 // -----------------------------FUNZIONI GLOBALI ---------------------------------------
 
+// funzione per far comparire il tasto microfono e far sparire il tasto invia
+function microfonoOn(){
+  $("#inputRisposta").focus(function(){
+    $(".fa-microphone").css("display","none");
+    $("#footer .fa-telegram-plane").css("display","block");
+  })
+};
+
+
+
+// funzione per far comparire il tasto invia e far sparire il tasto microfono
+function tastoInviaOn(){
+  $("#inputRisposta").blur(function(){
+    $(".fa-microphone").css("display","block");
+    $("#footer .fa-telegram-plane").css("display","none");
+  })
+};
+
+
+
 // funzione per l'invio del messaggio da input utente
 function rispostaInviata(){
   // prendo il valore di input della tastiera
@@ -43,7 +54,6 @@ function rispostaInviata(){
   if (testoRisposta != ""){
     // prendo l'orario della macchina tramite funzione globale
     time();
-
     // creo la variabile che contiene il blocco html da stampare
     var rispostaInviata =$(
     "<div class='messaggio inviato'>" +
@@ -51,33 +61,38 @@ function rispostaInviata(){
       "<span class=\"freccetta-info\"><i class=\"fas fa-chevron-down\"></i></span>"+
       "<span class=\"orario-messaggio\"></span>" +
     "</div>");
-
+    // vado a modificare il contenuto del nuovo blocco html creato agendo sulle classi dei figli
     rispostaInviata.children(".testo-messaggio").text(testoRisposta);
     rispostaInviata.children(".orario-messaggio").text(time);
-
     // selezionando il contenitore della chat, "appendo" ad esso il nuovo div
     $("#chat").append(rispostaInviata);
     // console.log(testoRisposta);
+    // a funzione terminata svuoto il box input
+    $("#inputRisposta").val("");
   }
 }
 
+
+
 // funzione per il ricevimento della risposta
 function rispostaRicevuta(){
-
+  // creo la variabile che contiene il blocco html da stampare
   var messaggioRicevuto =$(
     "<div class='messaggio ricevuto'>" +
     "<span class=\"testo-messaggio\"></span>"+
     "<span class=\"freccetta-info\"><i class=\"fas fa-chevron-down\"></i></span>"+
     "<span class=\"orario-messaggio\"></span>" +
   "</div>");
-
+  // richiamo la funzione globale per aquisire il tempo macchina
   time();
-
+  // vado a modificare il contenuto del nuovo blocco html creato agendo sulle classi dei figli
   messaggioRicevuto.children(".testo-messaggio").text("ok");
   messaggioRicevuto.children(".orario-messaggio").text(time);
   $("#chat").append(messaggioRicevuto);
 }
-// --------------------------------------------------------------
+
+
+
 // funzione per l'ottenimento del tempo attuale
 function time(){
   var dt = new Date();
