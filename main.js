@@ -18,7 +18,28 @@ $( document ).ready(function() {
       setTimeout(rispostaRicevuta, 1000);
     } //fine ciclo if di controllo tasto premuto
   }); // fine evento keypress
+
+// keydown
+  $("#inputCerca").keyup(function(e){
+    // salvo input utente in campo del filtro stringa1
+    var stringaRicerca = $("#inputCerca").val().toUpperCase();
+    console.log(stringaRicerca);
+
+     // selezionare tutti i blocchi di contatto e ciclare tra di essi
+    $(".contatto").each(function() {
+      //salvo in una var il valore del testo del nome nel contatto (stringa2)
+      var stringaNome = $(this).find(".nomeContatto").text().toUpperCase();
+
+      if (!(stringaNome.includes(stringaRicerca))) {
+        $(this).css("display", "none");
+      } // fine condizione
+    });// fine ciclo each
+
+  }); // fine evento keyup
+
 }); // fine document.ready
+
+
 
 
 
@@ -31,7 +52,7 @@ function microfonoOn(){
   $("#inputRisposta").focus(function(){
     $(".fa-microphone").css("display","none");
     $("#footer .fa-telegram-plane").css("display","block");
-  })
+  });
 };
 
 
@@ -41,7 +62,7 @@ function tastoInviaOn(){
   $("#inputRisposta").blur(function(){
     $(".fa-microphone").css("display","block");
     $("#footer .fa-telegram-plane").css("display","none");
-  })
+  });
 };
 
 
@@ -66,7 +87,6 @@ function rispostaInviata(){
     rispostaInviata.children(".orario-messaggio").text(time);
     // selezionando il contenitore della chat, "appendo" ad esso il nuovo div
     $("#chat").append(rispostaInviata);
-    // console.log(testoRisposta);
     // a funzione terminata svuoto il box input
     $("#inputRisposta").val("");
   }
