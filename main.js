@@ -9,6 +9,7 @@ $( document ).ready(function() {
   // richiamo la funzione globale per far comparire l'icona invio e sparire quella di microfono
   tastoInviaOn();
 
+  // CREO L'EVENTO CHE FA INVIARE E RICEVERE LE RISPOSTE AL TASTO INVIO
   // creo l'evento alla pressione del tasto invio
   $("#inputRisposta").keypress(function(e) {
     // l'evento si innesca se viene premuto il tasto 13 della tastiera --> invio
@@ -18,11 +19,13 @@ $( document ).ready(function() {
     } //fine ciclo if di controllo tasto premuto
   }); // fine evento keypress
 
+  // CREO L'EVENTO CHE FA INVIARE E RICEVERE LE RISPOSTE AL TASTO SU SCHERMO
   $(".mic-e-invia").click(function(){
     // richiamo la funzione globale per inviare le risposte
     rispostaInviata();
   });
 
+  // CREO L'EVENTO CHE PERMETTE DI RICERCARE IN LISTA CHAT
   // creo l'evento al sollevamento dalla pressione dei tasti per scrivere
   $("#inputCerca").keyup(function(){
     // salvo input utente in campo del filtro stringa1
@@ -40,19 +43,25 @@ $( document ).ready(function() {
     });// fine ciclo each
   }); // fine evento keyup
 
-  // CREO L'EVENTO CHE FA PASSARE L'UTENTE DA UNA CHAT ALL'ALTRA
+  // CREO L'EVENTO CHE FA PASSARE L'UTENTE DA UNA CHAT ALL'ALTRA-----------------------
   $(".contatto").click(function(){
     $(".box-chat").removeClass("active");
     var indiceContatto = $(this).index();
     $(".box-chat").eq(indiceContatto).addClass("active");
-    // var nomeContattoAperto =
+    // CAMBIO INFORMAZIONI NELL'HEADER CHAT ---------
+    var nomeContattoAperto = $(this).find(".nomeContatto").text();
+    $("#contatto-aperto").text(nomeContattoAperto);
+    var immagineContattoAperto = $(this).children("#immagine-contatto").attr('src');
+    $("#immagine-utente-aperto").attr('src', immagineContattoAperto);
+    $("#ultimo-accesso").text("Ultimo accesso oggi alle " + time());
   }); // fine evento click
 
-  // CREO L'EVENTO CHE FA APPARIRE IL MENU OPZIONI DALLE FRECCINE NEI MESSAGGI
+  // CREO L'EVENTO CHE FA APPARIRE IL MENU OPZIONI DALLE FRECCINE NEI MESSAGGI---------------
   $(".box-chat").on("click", ".freccetta-info", function(){
     $(this).siblings(".box-opzioni-messaggio").toggle();
   }); // fine evento click
 
+  // CREO L'EVENTO CHE CANCELLA IL MESSAGGIO
   $(".box-chat").on("click", ".messaggio #cancella-messaggio", function(){
     $(this).parents(".messaggio").hide();
   }); //fine evento click
@@ -117,6 +126,7 @@ function rispostaInviata(){
 
     // impostando il timeout, rischiamo la funzione globale che mi stamnpa la risposta del pc dopo 1 secondo
     setTimeout(rispostaRicevuta, 1000);
+    $("#ultimo-accesso").text("Sta scrivendo...");
   }
 }
 
@@ -141,6 +151,8 @@ function rispostaRicevuta(){
   messaggioRicevuto.children(".testo-messaggio").text("ok");
   messaggioRicevuto.children(".orario-messaggio").text(time);
   $(".box-chat.active").append(messaggioRicevuto);
+  $("#ultimo-accesso").text("Ultimo accesso oggi alle " + time());
+
 }
 
 
