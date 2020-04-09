@@ -24,6 +24,14 @@ img {
   border-radius: 100%;
 }
 
+a {
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
 
 #app {
   display: flex;
@@ -209,12 +217,13 @@ img {
 }
 
 /* CHAT ------------------ */
-#chat {
+.box-chat {
   width: 100%;
   height: calc(100% - 70px - 70px);
   background-image: url("img/sfondo.jpg");
   padding: 5% 10%;
   overflow-y: auto;
+  display: none;
 }
 
 .messaggio {
@@ -226,6 +235,23 @@ img {
   min-width: 20%;
   max-width: 60%;
   position: relative;
+}
+
+.box-opzioni-messaggio {
+  display: none;
+  position: absolute;
+  bottom: -85px;
+  right: 0;
+  background-color: white;
+  text-align: center;
+  padding: 20px;
+  font-size: 14px;
+  z-index: 2;
+  box-shadow: 0px 0px 15px 3px #888888;
+}
+
+.box-opzioni-messaggio #info-messaggio {
+  margin-bottom: 20px;
 }
 
 .inviato {
@@ -262,7 +288,6 @@ img {
 
 #footer {
   display: flex;
-  justify-content: space-around;
   align-items: center;
   height: 70px;
   width: 100%;
@@ -278,6 +303,15 @@ img {
   font-weight: normal;
 }
 
+.emoji , .mic-e-invia {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 10%;
+  height: 100%;
+  text-align: center;
+}
+
 #footer i {
   font-size: 25px;
   color: #6B7376;
@@ -288,8 +322,8 @@ img {
 }
 
 
-/* JAVASCRIPT CSS ------------ */
+/* JAVASCRIPT CSS */
 
-.remove {
-  display: none;
+.active {
+  display: block;
 }

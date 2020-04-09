@@ -5,6 +5,7 @@ $( document ).ready(function() {
 
   // richiamo la funzione globale per far comparire l'icona microfono e sparire quella di invio
   microfonoOn();
+
   // richiamo la funzione globale per far comparire l'icona invio e sparire quella di microfono
   tastoInviaOn();
 
@@ -14,28 +15,40 @@ $( document ).ready(function() {
     if (e.which == 13) {
       // richiamo la funzione globale per inviare le risposte
       rispostaInviata();
-      // impostando il timeout, rischiamo la funzione globale che mi stamnpa la risposta del pc dopo 1 secondo
-      setTimeout(rispostaRicevuta, 1000);
     } //fine ciclo if di controllo tasto premuto
   }); // fine evento keypress
+
+  $(".mic-e-invia").click(function(){
+    // richiamo la funzione globale per inviare le risposte
+    rispostaInviata();
+  });
 
   // creo l'evento al sollevamento dalla pressione dei tasti per scrivere
   $("#inputCerca").keyup(function(){
     // salvo input utente in campo del filtro stringa1
     var stringaRicerca = $("#inputCerca").val().toUpperCase();
-
     // seleziono tutti i blocchi di contatto e ciclo tra di loro
     $(".contatto").each(function() {
       //salvo in una var il valore del testo del nome nel contatto (stringa2)
       var stringaNome = $(this).find(".nomeContatto").text().toUpperCase();
       // imposto la condizione per far apparire e scomparire i contatti
-      if (!(stringaNome.includes(stringaRicerca))) {
-        $(this).addClass("remove");
+      if (stringaNome.includes(stringaRicerca)) {
+        $(this).show();
       } else {
-        $(this).removeClass("remove");
+        $(this).hide();
       }// fine condizione
     });// fine ciclo each
   }); // fine evento keyup
+
+  
+  $(".contatto").click(function(){
+    $(".box-chat").removeClass("active");
+    var indiceContatto = $(this).index();
+    $(".box-chat").eq(indiceContatto).addClass("active");
+  }); // fine evento click
+
+
+
 }); // fine document.ready
 
 
@@ -85,9 +98,12 @@ function rispostaInviata(){
     rispostaInviata.children(".testo-messaggio").text(testoRisposta);
     rispostaInviata.children(".orario-messaggio").text(time);
     // selezionando il contenitore della chat, "appendo" ad esso il nuovo div
-    $("#chat").append(rispostaInviata);
+    $(".box-chat.active").append(rispostaInviata);
     // a funzione terminata svuoto il box input
     $("#inputRisposta").val("");
+
+    // impostando il timeout, rischiamo la funzione globale che mi stamnpa la risposta del pc dopo 1 secondo
+    setTimeout(rispostaRicevuta, 1000);
   }
 }
 
@@ -107,7 +123,7 @@ function rispostaRicevuta(){
   // vado a modificare il contenuto del nuovo blocco html creato agendo sulle classi dei figli
   messaggioRicevuto.children(".testo-messaggio").text("ok");
   messaggioRicevuto.children(".orario-messaggio").text(time);
-  $("#chat").append(messaggioRicevuto);
+  $(".box-chat.active").append(messaggioRicevuto);
 }
 
 
