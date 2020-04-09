@@ -45,18 +45,20 @@ $( document ).ready(function() {
     $(".box-chat").removeClass("active");
     var indiceContatto = $(this).index();
     $(".box-chat").eq(indiceContatto).addClass("active");
+    // var nomeContattoAperto =
   }); // fine evento click
 
   // CREO L'EVENTO CHE FA APPARIRE IL MENU OPZIONI DALLE FRECCINE NEI MESSAGGI
-  $(".freccetta-info").click(function(){
+  $(".box-chat").on("click", ".freccetta-info", function(){
     $(this).siblings(".box-opzioni-messaggio").toggle();
   }); // fine evento click
 
-  $(".messaggio #cancella-messaggio").click(function(){
+  $(".box-chat").on("click", ".messaggio #cancella-messaggio", function(){
     $(this).parents(".messaggio").hide();
   }); //fine evento click
 
 }); // fine document.ready
+
 
 
 
@@ -72,7 +74,7 @@ function microfonoOn(){
     $(".fa-microphone").css("display","none");
     $("#footer .fa-telegram-plane").css("display","block");
   });
-};
+}
 
 
 
@@ -82,7 +84,7 @@ function tastoInviaOn(){
     $(".fa-microphone").css("display","block");
     $("#footer .fa-telegram-plane").css("display","none");
   });
-};
+}
 
 
 
@@ -100,6 +102,10 @@ function rispostaInviata(){
       "<span class=\"testo-messaggio\"></span>"+
       "<span class=\"freccetta-info\"><i class=\"fas fa-chevron-down\"></i></span>"+
       "<span class=\"orario-messaggio\"></span>" +
+      "<ul class='box-opzioni-messaggio'>"+
+        "<li id='info-messaggio'>Info messaggio</li>"+
+        "<li id='cancella-messaggio'>Cancella messaggio</li>"+
+      "</ul>"+
     "</div>");
     // vado a modificare il contenuto del nuovo blocco html creato agendo sulle classi dei figli
     rispostaInviata.children(".testo-messaggio").text(testoRisposta);
@@ -124,6 +130,10 @@ function rispostaRicevuta(){
     "<span class=\"testo-messaggio\"></span>"+
     "<span class=\"freccetta-info\"><i class=\"fas fa-chevron-down\"></i></span>"+
     "<span class=\"orario-messaggio\"></span>" +
+    "<ul class='box-opzioni-messaggio'>"+
+      "<li id='info-messaggio'>Info messaggio</li>"+
+      "<li id='cancella-messaggio'>Cancella messaggio</li>"+
+    "</ul>"+
   "</div>");
   // richiamo la funzione globale per aquisire il tempo macchina
   time();
@@ -138,6 +148,17 @@ function rispostaRicevuta(){
 // funzione per l'ottenimento del tempo attuale
 function time(){
   var dt = new Date();
-  var time = dt.getHours() + ":" + dt.getMinutes();
+
+  var minuti = dt.getMinutes() ;
+  var ore = dt.getHours();
+
+  if (minuti < 10) {
+    minuti = "0" + minuti;
+  }
+  if (ore < 10) {
+    minuti = "0" + minuti;
+  }
+
+  var time = ore + ":" + minuti;
   return time;
 }
