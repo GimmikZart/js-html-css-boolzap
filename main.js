@@ -52,9 +52,8 @@ $( document ).ready(function() {
     $(this).siblings(".box-opzioni-messaggio").toggle();
   }); // fine evento click
 
-  $("#cancella-messaggio").click(function(){
-    console.log(10);
-    // $(this).parents(".messaggio").hide();
+  $(".messaggio #cancella-messaggio").click(function(){
+    $(this).parents(".messaggio").hide();
   }); //fine evento click
 
 }); // fine document.ready
