@@ -36,18 +36,26 @@ $( document ).ready(function() {
         $(this).show();
       } else {
         $(this).hide();
-      }// fine condizione
+      } // fine condizione
     });// fine ciclo each
   }); // fine evento keyup
 
-  
+  // CREO L'EVENTO CHE FA PASSARE L'UTENTE DA UNA CHAT ALL'ALTRA
   $(".contatto").click(function(){
     $(".box-chat").removeClass("active");
     var indiceContatto = $(this).index();
     $(".box-chat").eq(indiceContatto).addClass("active");
   }); // fine evento click
 
+  // CREO L'EVENTO CHE FA APPARIRE IL MENU OPZIONI DALLE FRECCINE NEI MESSAGGI
+  $(".freccetta-info").click(function(){
+    $(this).siblings(".box-opzioni-messaggio").toggle();
+  }); // fine evento click
 
+  $("#cancella-messaggio").click(function(){
+    console.log(10);
+    // $(this).parents(".messaggio").hide();
+  }); //fine evento click
 
 }); // fine document.ready
 

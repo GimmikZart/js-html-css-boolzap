@@ -181,6 +181,11 @@ ul {
   border-bottom: 1px solid #F5F5F5;
 }
 
+.contatto:hover {
+  background-color: rgb(226, 222, 222);
+  cursor: pointer;
+}
+
 .contatto img {
   margin: 0 20px;
   width: 60px;
@@ -254,6 +259,10 @@ ul {
   margin-bottom: 20px;
 }
 
+.box-opzioni-messaggio li {
+  cursor: pointer;
+}
+
 .inviato {
   float: right;
   clear: both;
@@ -269,6 +278,10 @@ ul {
 .freccetta-info {
   display: none;
   color:#B6B9BB;
+}
+
+.freccetta-info:hover {
+  cursor: pointer;
 }
 
 .messaggio:hover .freccetta-info {
