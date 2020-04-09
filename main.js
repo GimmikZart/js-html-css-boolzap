@@ -152,7 +152,6 @@ function rispostaRicevuta(){
   messaggioRicevuto.children(".orario-messaggio").text(time);
   $(".box-chat.active").append(messaggioRicevuto);
   $("#ultimo-accesso").text("Ultimo accesso oggi alle " + time());
-
 }
 
 
