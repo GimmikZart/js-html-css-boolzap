@@ -53,7 +53,7 @@ $( document ).ready(function() {
     $("#contatto-aperto").text(nomeContattoAperto);
     var immagineContattoAperto = $(this).children("#immagine-contatto").attr('src');
     $("#immagine-utente-aperto").attr('src', immagineContattoAperto);
-    $("#ultimo-accesso").text("Ultimo accesso oggi alle " + time());
+    $("#ultimo-accesso").text("Ultimo accesso oggi alle " + timeRandom());
   }); // fine evento click
 
   // CREO L'EVENTO CHE FA APPARIRE IL MENU OPZIONI DALLE FRECCINE NEI MESSAGGI---------------
@@ -65,6 +65,7 @@ $( document ).ready(function() {
   $(".box-chat").on("click", ".messaggio #cancella-messaggio", function(){
     $(this).parents(".messaggio").hide();
   }); //fine evento click
+
 
 }); // fine document.ready
 
@@ -167,9 +168,26 @@ function time(){
     minuti = "0" + minuti;
   }
   if (ore < 10) {
+    ore = "0" + ore;
+  }
+
+  var time = ore + ":" + minuti;
+  return time;
+}
+
+// funzione per l'ottenimento di un orario randomico
+function timeRandom(){
+  var minuti = Math.ceil(Math.random()*59);
+  var ore = Math.floor(Math.random()*23);
+
+  if (ore < 10) {
+    ore = "0" + ore;
+  }
+  if (minuti < 10) {
     minuti = "0" + minuti;
   }
 
   var time = ore + ":" + minuti;
+  console.log(time);
   return time;
 }
